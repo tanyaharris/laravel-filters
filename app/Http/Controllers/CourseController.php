@@ -9,13 +9,11 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        return Course::with(['subjects'])->filter($request, $this->getFilters())->get();
+        $courses =  Course::with(['subjects'])->filter($request)->get();
+
+        return view('courses.index',[
+           'courses' => $courses
+        ]);
     }
 
-    protected function getFilters()
-    {
-        return [
-
-        ];
-    }
 }
