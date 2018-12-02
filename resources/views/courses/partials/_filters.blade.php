@@ -1,13 +1,7 @@
-@include('courses.partials._filter_list',[
-    'map' => [
-        'free' => 'Free',
-        'premium' => 'Premium'
-    ],
-    'key' => 'access'
-])
+<a href="{{route('courses.index')}}" class="list-group-item">Clear of filter</a>
 
-@include('courses.partials._filter_list',[
-    'map' => ['advanced'=>'Advanced','intermediate'=>'Intermediate','beginner'=>'Beginner'],
-    'key' => 'difficulty'
-])
+@foreach(\App\Filters\Course\CourseFilters::mappings() as $key => $map)
+    @include('courses.partials._filter_list',compact('key','map'))
+@endforeach
+
 

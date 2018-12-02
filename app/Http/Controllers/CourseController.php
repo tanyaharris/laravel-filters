@@ -9,7 +9,7 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        $courses =  Course::with(['subjects'])->filter($request)->get();
+        $courses =  Course::with(['subjects'])->filter($request)->paginate(2);
 
         return view('courses.index',[
            'courses' => $courses

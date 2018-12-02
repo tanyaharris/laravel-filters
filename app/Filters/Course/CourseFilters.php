@@ -14,4 +14,16 @@ class CourseFilters extends FiltersAbstract
         'subject' => SubjectFilter::class,
         'views' => ViewsOrder::class
     ];
+
+    public static function mappings()
+    {
+        return [
+
+          'access' => [
+              'free' => 'Free',
+              'premium' => 'Premium'
+          ],
+          'difficulty' => ['advanced'=>'Advanced','intermediate'=>'Intermediate','beginner'=>'Beginner']
+        ];
+    }
 }
