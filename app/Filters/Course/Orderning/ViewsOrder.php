@@ -10,6 +10,6 @@ class ViewsOrder extends FilterAbstract
 {
     public function filter(Builder $builder, $value)
     {
-        return $builder->orderBy('views',$value);
+        return $builder->orderBy('views',$this->resolveOrderDirection($value));
     }
 }

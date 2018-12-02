@@ -18,4 +18,12 @@ abstract class FilterAbstract
     {
         return array_get($this->mappings(),$key);
     }
+
+    protected function resolveOrderDirection($direction)
+    {
+        return array_get([
+            'desc' => 'desc',
+            'asc' => 'asc'
+        ],$direction,'desc');
+    }
 }
