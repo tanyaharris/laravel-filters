@@ -26,4 +26,5 @@ class CourseFilters extends FiltersAbstract
           'difficulty' => ['advanced'=>'Advanced','intermediate'=>'Intermediate','beginner'=>'Beginner']
         ];
     }
+
 }

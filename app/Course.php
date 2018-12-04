@@ -10,7 +10,11 @@ use Illuminate\Http\Request;
 class Course extends Model
 {
     protected $appends = [
-        'started'
+        'started',
+        'FormattedAccess',
+        'FormattedType',
+        'FormattedDifficulty',
+        'FormattedStarted'
     ];
 
 
