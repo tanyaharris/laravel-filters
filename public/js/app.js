@@ -50770,7 +50770,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50802,6 +50802,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "filters",
@@ -50811,6 +50822,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             filters: {},
             selectedFilters: _.omit(this.$route.query, ['page'])
         };
+    },
+
+    computed: {
+        filtersInUse: function filtersInUse() {
+            return _.isEmpty(this.selectedFilters);
+        }
     },
     mounted: function mounted() {
         var _this = this;
@@ -50824,6 +50841,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         activateFilter: function activateFilter(key, value) {
             this.selectedFilters = Object.assign({}, this.selectedFilters, _defineProperty({}, key, value));
 
+            this.updateQueryString();
+        },
+        clearFilter: function clearFilter(key) {
+            this.selectedFilters = _.omit(this.selectedFilters, key);
+            this.updateQueryString();
+        },
+        clearFilters: function clearFilters() {
+            this.selectedFilters = {};
+            this.$router.replace({});
+        },
+        updateQueryString: function updateQueryString() {
             this.$router.replace({
                 query: _extends({}, this.selectedFilters, {
                     page: 1
@@ -50845,28 +50873,65 @@ var render = function() {
     "div",
     { staticClass: "filters" },
     [
-      _vm._v("\n    " + _vm._s(_vm.selectedFilters) + "\n    "),
-      _vm._l(_vm.filters, function(map, key) {
-        return _c(
-          "div",
-          { staticClass: "list-group" },
-          _vm._l(map, function(filter, value) {
-            return _c(
+      _vm.filtersInUse
+        ? _c("p", [
+            _c(
               "a",
               {
-                staticClass: "list-group-item",
-                class: { active: _vm.selectedFilters[key] === value },
                 attrs: { href: "#" },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    _vm.activateFilter(key, value)
+                    return _vm.clearFilters($event)
                   }
                 }
               },
-              [_vm._v("\n            " + _vm._s(filter) + "\n        ")]
+              [_vm._v("Clear filters")]
             )
-          })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.filters, function(map, key) {
+        return _c(
+          "div",
+          { staticClass: "list-group" },
+          [
+            _vm._l(map, function(filter, value) {
+              return _c(
+                "a",
+                {
+                  staticClass: "list-group-item",
+                  class: { active: _vm.selectedFilters[key] === value },
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.activateFilter(key, value)
+                    }
+                  }
+                },
+                [_vm._v("\n            " + _vm._s(filter) + "\n        ")]
+              )
+            }),
+            _vm._v(" "),
+            _vm.selectedFilters[key]
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-info",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.clearFilter(key)
+                      }
+                    }
+                  },
+                  [_vm._v("\n            × CLear this filter\n        ")]
+                )
+              : _vm._e()
+          ],
+          2
         )
       })
     ],
@@ -51031,47 +51096,67 @@ var render = function() {
       "ul",
       { staticClass: "pagination" },
       [
-        _c("li", { class: { disabled: _vm.meta.current_page === 1 } }, [
-          _c(
-            "a",
-            {
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.switched(_vm.meta.current_page - 1)
-                }
-              }
-            },
-            [_c("span", [_vm._v("«")])]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.meta.last_page, function(x) {
-          return _c("li", { class: { active: _vm.meta.curent_page === x } }, [
-            _c(
-              "a",
-              {
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.switched(x)
-                  }
-                }
-              },
-              [_vm._v(_vm._s(x))]
-            )
-          ])
-        }),
-        _vm._v(" "),
         _c(
           "li",
-          { class: { disabled: _vm.meta.current_page === _vm.meta.last_page } },
+          {
+            staticClass: "page-item",
+            class: { disabled: _vm.meta.current_page === 1 }
+          },
           [
             _c(
               "a",
               {
+                staticClass: "page-link",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.switched(_vm.meta.current_page - 1)
+                  }
+                }
+              },
+              [_c("span", [_vm._v("«")])]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.meta.last_page, function(x) {
+          return _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: { active: _vm.meta.curent_page === x }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.switched(x)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(x))]
+              )
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            staticClass: "page-item",
+            class: { disabled: _vm.meta.current_page === _vm.meta.last_page }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
                 attrs: { href: "#" },
                 on: {
                   click: function($event) {
@@ -51130,10 +51215,7 @@ var render = function() {
                     })
                   }),
                   _vm._v(" "),
-                  _c("pagination", {
-                    attrs: { meta: _vm.meta },
-                    on: { "pagination:switched": _vm.getCourses }
-                  })
+                  _c("pagination", { attrs: { meta: _vm.meta } })
                 ]
               : [
                   _vm._v(

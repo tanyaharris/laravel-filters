@@ -1,14 +1,14 @@
 <template>
     <nav>
         <ul class="pagination">
-            <li :class="{ 'disabled': meta.current_page === 1 }">
-                <a href="#" @click.prevent="switched(meta.current_page - 1)"><span>&laquo;</span></a>
+            <li :class="{ 'disabled': meta.current_page === 1 }" class="page-item">
+                <a href="#" @click.prevent="switched(meta.current_page - 1)" class="page-link"><span>&laquo;</span></a>
             </li>
-            <li :class="{ 'active':meta.curent_page === x }" v-for="x in meta.last_page">
-                <a href="#" @click.prevent="switched(x)">{{ x }}</a>
+            <li :class="{ 'active':meta.curent_page === x }" v-for="x in meta.last_page" class="page-item">
+                <a href="#" @click.prevent="switched(x)" class="page-link">{{ x }}</a>
             </li>
-            <li  :class="{ 'disabled': meta.current_page === meta.last_page }">
-                <a href="#" @click.prevent="switched(meta.current_page + 1)"><span>&raquo;</span></a>
+            <li  :class="{ 'disabled': meta.current_page === meta.last_page }" class="page-item">
+                <a href="#" @click.prevent="switched(meta.current_page + 1)" class="page-link"><span>&raquo;</span></a>
             </li>
         </ul>
     </nav>

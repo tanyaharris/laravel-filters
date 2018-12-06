@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <template v-if="courses.length">
                         <course v-for="course in courses" :course="course" :key="course.id"></course>
-                        <pagination :meta="meta" v-on:pagination:switched="getCourses"></pagination>
+                        <pagination :meta="meta"></pagination>
                     </template>
                     <template v-else>
                         No resource found
