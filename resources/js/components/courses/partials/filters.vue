@@ -5,6 +5,7 @@
             <a
                     href="#"
                     class="list-group-item"
+                    :class="{'active':selectedFilters[key]=== value}"
                     v-for="filter, value in map"
                     @click.prevent="activateFilter(key, value)"
             >

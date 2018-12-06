@@ -6,8 +6,13 @@
         <div class="col-sm-9">
             <div class="card">
                 <div class="card-body">
-                    <course v-for="course in courses" :course="course" :key="course.id"></course>
-                    <pagination :meta="meta" v-on:pagination:switched="getCourses"></pagination>
+                    <template v-if="courses.length">
+                        <course v-for="course in courses" :course="course" :key="course.id"></course>
+                        <pagination :meta="meta" v-on:pagination:switched="getCourses"></pagination>
+                    </template>
+                    <template v-else>
+                        No resource found
+                    </template>
                 </div>
             </div>
         </div>

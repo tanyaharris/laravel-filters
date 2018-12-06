@@ -50385,7 +50385,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50437,6 +50437,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pagination_pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pagination_pagination_vue__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50765,7 +50770,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50780,6 +50785,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -50849,6 +50855,7 @@ var render = function() {
               "a",
               {
                 staticClass: "list-group-item",
+                class: { active: _vm.selectedFilters[key] === value },
                 attrs: { href: "#" },
                 on: {
                   click: function($event) {
@@ -51114,14 +51121,25 @@ var render = function() {
           "div",
           { staticClass: "card-body" },
           [
-            _vm._l(_vm.courses, function(course) {
-              return _c("course", { key: course.id, attrs: { course: course } })
-            }),
-            _vm._v(" "),
-            _c("pagination", {
-              attrs: { meta: _vm.meta },
-              on: { "pagination:switched": _vm.getCourses }
-            })
+            _vm.courses.length
+              ? [
+                  _vm._l(_vm.courses, function(course) {
+                    return _c("course", {
+                      key: course.id,
+                      attrs: { course: course }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _c("pagination", {
+                    attrs: { meta: _vm.meta },
+                    on: { "pagination:switched": _vm.getCourses }
+                  })
+                ]
+              : [
+                  _vm._v(
+                    "\n                    No resource found\n                "
+                  )
+                ]
           ],
           2
         )
