@@ -29,9 +29,7 @@
                 this.$emit('pagination:switched',page)
 
                 this.$router.replace({
-                    query:{
-                        page
-                    }
+                    query: Object.assign({},this.$route.query, {page})
                 })
             },
             pageIfOutOfBounds(page){

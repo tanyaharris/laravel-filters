@@ -1,5 +1,6 @@
 <template>
     <div class="filters">
+        {{selectedFilters}}
         <div class="list-group" v-for="map, key in filters">
             <a
                     href="#"
@@ -22,7 +23,7 @@
         data(){
           return{
               filters: {},
-              selectedFilters: {}
+              selectedFilters: _.omit(this.$route.query,['page'])
           }
         },
         mounted(){
@@ -32,7 +33,14 @@
         },
         methods:{
             activateFilter(key, value){
+                this.selectedFilters = Object.assign({},this.selectedFilters,{ [key]: value});
 
+                this.$router.replace({
+                    query:{
+                        ...this.selectedFilters,
+                        page: 1
+                    }
+                });
             }
         }
     }

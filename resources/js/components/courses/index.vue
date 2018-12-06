@@ -30,14 +30,23 @@
               meta: {}
           }
         },
+        watch: {
+          '$route.query':{
+              handler( query ){
+                this.getCourses(1, query)
+              },
+              deep: true
+          }
+        },
         mounted(){
             this.getCourses()
         },
         methods:{
-            getCourses( page = this.$route.query.page ){
+            getCourses( page = this.$route.query.page, query = this.$route.query ){
                 axios.get('/api/courses',{
                     params: {
-                        page
+                        page,
+                        ...query
                     }
                 }).then((response)=>{
                     this.courses = response.data.data;
